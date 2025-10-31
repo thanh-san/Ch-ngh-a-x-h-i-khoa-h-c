@@ -69,7 +69,7 @@ const App: React.FC = () => {
         className="w-full h-full object-cover"
       />
     </div>
-    <h1 className="text-xl font-bold">AI hỗ trợ học tập</h1>
+    <h1  className="text-xl font-bold">AI Chat hỗ trợ học tập</h1>
   </header>
       
       <main className="flex-1 overflow-y-auto p-4 md:p-6">
