@@ -4,13 +4,13 @@ import { SYSTEM_INSTRUCTION } from '../constants';
 let chat: Chat | null = null;
 
 const initializeChat = (): Chat => {
-  // FIX: API key must be read from environment variables.
-  const API_KEY = process.env.API_KEY;
+  // Dán API Key của bạn vào đây
+  const apiKey = "AIzaSyCkVJjbpMuOKnbB4zXb6Tw8a2Pjo_vPp-s"; 
 
-  if (!API_KEY) {
-    throw new Error("API_KEY is not set.");
+  if (!apiKey) {
+    throw new Error("API_KEY environment variable not set");
   }
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
+  const ai = new GoogleGenAI({ apiKey: apiKey });
   
   return ai.chats.create({
     model: 'gemini-2.5-flash',

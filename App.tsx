@@ -60,11 +60,17 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-      <header className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-10">
-        <VietnamFlagIcon />
-        <h1 className="text-xl font-bold">AI hỗ trợ học tập</h1>
-      </header>
+<div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+  <header className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-10">
+    <div className="w-9 h-9 rounded-full overflow-hidden border border-red-400 bg-white flex items-center justify-center">
+      <img
+        src="/img/image.png"
+        alt="Việt Nam"
+        className="w-full h-full object-cover"
+      />
+    </div>
+    <h1 className="text-xl font-bold">AI hỗ trợ học tập</h1>
+  </header>
       
       <main className="flex-1 overflow-y-auto p-4 md:p-6">
         <div className="max-w-4xl mx-auto space-y-8">
