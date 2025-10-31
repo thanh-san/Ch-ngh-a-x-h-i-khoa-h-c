@@ -64,7 +64,7 @@ const App: React.FC = () => {
   <header className="flex items-center justify-center gap-3 p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-10">
     <div className="w-9 h-9 rounded-full overflow-hidden border border-red-400 bg-white flex items-center justify-center">
       <img
-        src="/img/image.png"
+        src="./img/image.png"
         alt="Việt Nam"
         className="w-full h-full object-cover"
       />
