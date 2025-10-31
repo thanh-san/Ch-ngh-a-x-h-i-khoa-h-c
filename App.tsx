@@ -1,6 +1,5 @@
-
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { getAiChatResponse } from './services/geminiService';
+import { streamAiChatResponse } from './services/geminiService';
 import { Message } from './types';
 import { SendIcon, AiIcon } from './components/Icons';
 import Markdown from 'react-markdown';
@@ -28,28 +27,12 @@ const ChatMessage: React.FC<MessageProps> = ({ message }) => {
         }`}
       >
         <div className="prose prose-sm dark:prose-invert max-w-none">
-          <Markdown remarkPlugins={[remarkGfm]}>{message.text}</Markdown>
+          {message.text ? <Markdown remarkPlugins={[remarkGfm]}>{message.text}</Markdown> : <span className="w-2 h-2 rounded-full bg-gray-500 inline-block animate-pulse"></span>}
         </div>
       </div>
     </div>
   );
 };
-
-// Helper component for loading indicator
-const LoadingIndicator: React.FC = () => (
-  <div className="flex items-start gap-4 my-4">
-    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
-      <AiIcon />
-    </div>
-    <div className="max-w-sm px-5 py-3 rounded-2xl shadow-md bg-white dark:bg-gray-800 rounded-bl-none">
-      <div className="flex items-center justify-center space-x-2">
-        <div className="w-2 h-2 rounded-full bg-gray-500 animate-pulse"></div>
-        <div className="w-2 h-2 rounded-full bg-gray-500 animate-pulse [animation-delay:0.2s]"></div>
-        <div className="w-2 h-2 rounded-full bg-gray-500 animate-pulse [animation-delay:0.4s]"></div>
-      </div>
-    </div>
-  </div>
-);
 
 // Helper component for the chat input form
 interface ChatInputProps {
@@ -116,28 +99,35 @@ export default function App() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading]);
+  }, [messages]);
 
   const handleSendMessage = useCallback(async (text: string) => {
     const userMessage: Message = { id: Date.now().toString(), text, sender: 'user' };
-    setMessages((prev) => [...prev, userMessage]);
+    
+    const aiMessageId = (Date.now() + 1).toString();
+    const aiMessagePlaceholder: Message = { id: aiMessageId, text: '', sender: 'ai' };
+
+    setMessages((prev) => [...prev, userMessage, aiMessagePlaceholder]);
     setIsLoading(true);
 
     try {
-      const aiResponseText = await getAiChatResponse(text);
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: aiResponseText,
-        sender: 'ai',
-      };
-      setMessages((prev) => [...prev, aiMessage]);
+      await streamAiChatResponse(text, (chunk) => {
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === aiMessageId
+              ? { ...msg, text: msg.text + chunk }
+              : msg
+          )
+        );
+      });
     } catch (error) {
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: 'Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại.',
-        sender: 'ai',
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+       setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === aiMessageId
+            ? { ...msg, text: 'Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại.' }
+            : msg
+        )
+      );
     } finally {
       setIsLoading(false);
     }
@@ -159,7 +149,6 @@ export default function App() {
           {messages.map((msg) => (
             <ChatMessage key={msg.id} message={msg} />
           ))}
-          {isLoading && <LoadingIndicator />}
           <div ref={chatEndRef} />
         </div>
       </main>
