@@ -1,25 +1,71 @@
-
 import React from 'react';
 
-export const SendIcon = () => (
+export const SendIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
-    fill="currentColor"
-    className="w-6 h-6"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
   >
-    <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+    <line x1="22" y1="2" x2="11" y2="13"></line>
+    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
   </svg>
 );
 
-export const AiIcon = () => (
+export const UserIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg 
         xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
         viewBox="0 0 24 24" 
-        fill="currentColor" 
-        className="w-8 h-8"
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        {...props}
     >
-        <path fillRule="evenodd" d="M11.484 2.172a.75.75 0 011.032 0 11.209 11.209 0 014.328 4.672c.421.842.056 1.903-.787 2.324a1.83 1.83 0 01-2.324-.787c-.246-.493-.81-.66-1.286-.494a11.175 11.175 0 01-2.872 0c-.476-.166-1.04-.001-1.286.494a1.83 1.83 0 01-2.324.787c-.843-.421-1.208-1.482-.787-2.324A11.209 11.209 0 0111.484 2.172zM6.952 9.218a.75.75 0 01-.133 1.054l-3.323 2.658a.75.75 0 00.046 1.293l3.22 1.61a.75.75 0 11-.53 1.348l-3.22-1.61a2.25 2.25 0 01-.137-3.88l3.323-2.658a.75.75 0 011.054.133z" clipRule="evenodd" />
-        <path d="M14.814 15.021a.75.75 0 011.054-.133l3.323 2.658a2.25 2.25 0 01.138 3.88l-3.22 1.61a.75.75 0 11-.53-1.348l3.22-1.61a.75.75 0 00-.046-1.293l-3.22-1.61a.75.75 0 01-.133-1.054z" />
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
     </svg>
+);
+
+export const AiIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        {...props}
+    >
+        <path d="M12 8V4H8"></path>
+        <rect x="4" y="12" width="16" height="8" rx="2"></rect>
+        <path d="M4 14H2"></path><path d="M22 14H20"></path>
+        <path d="M15 7h2a2 2 0 0 1 2 2v2"></path>
+        <path d="M5 7H3a2 2 0 0 0-2 2v2"></path>
+    </svg>
+);
+
+export const VietnamFlagIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 900 600"
+    width="30"
+    height="20"
+    {...props}
+  >
+    <rect fill="#da251d" width="900" height="600"/>
+    <path fill="#ff0" d="m450 158.7-86.5 252.8 226.1-156.2H223.9l226.1 156.2z"/>
+  </svg>
 );

@@ -4,9 +4,8 @@ import { SYSTEM_INSTRUCTION } from '../constants';
 let chat: Chat | null = null;
 
 const initializeChat = (): Chat => {
-  // Sử dụng API Key bạn đã cung cấp.
-  // QUAN TRỌNG: Không commit key này lên các kho code công khai.
-  const API_KEY = "AIzaSyCkVJjbpMuOKnbB4zXb6Tw8a2Pjo_vPp-s";
+  // FIX: API key must be read from environment variables.
+  const API_KEY = process.env.API_KEY;
 
   if (!API_KEY) {
     throw new Error("API_KEY is not set.");
